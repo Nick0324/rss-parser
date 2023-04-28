@@ -23,12 +23,19 @@ def get_articles_route():
     else:
         filtered_articles = articles
 
+    # Get sort type from request parameters
+    sort_type = request.args.get('sort')
+
     # Get sort order from request parameters
-    sort_order = request.args.get('sort')
+    sort_order = request.args.get('order')
 
     # Sort articles by date or alphabetically
-    if sort_order == 'title':
+    if sort_type == 'title' and sort_order == 'asc':
         sorted_articles = sorted(filtered_articles, key=lambda a: a['title'].lower())
+    elif sort_type == 'title' and sort_order == 'desc':
+        sorted_articles = sorted(filtered_articles, key=lambda a: a['title'].lower(), reverse=True)
+    elif sort_type == 'time' and sort_order == 'desc':
+        sorted_articles = sorted(filtered_articles, key=lambda a: a['time'], reverse=True)
     else:
         sorted_articles = sorted(filtered_articles, key=lambda a: a['time'])
 

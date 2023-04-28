@@ -21,15 +21,21 @@
         <option value="title">Title</option>
     </select>
 
-    <ul id="article-list">
-        {% for article in articles %}
-            <li>
-                <h2><a href="{{ article.link }}">{{ article.title }}</a></h2>
-                <p>{{ article.description }}</p>
-                <p>{{ article.time }}</p>
-            </li>
-        {% endfor %}
-    </ul>
+    <table>
+  <tr>
+    <th><a href="?sort=title&order=asc">Title (A-Z)</a> / <a href="?sort=title&order=desc">Title (Z-A)</a></th>
+    <th><a href="?sort=time&order=asc">Time (Old-New)</a> / <a href="?sort=time&order=desc">Time (New-Old)</a></th>
+    <th>Description</th>
+  </tr>
+  {% for article in articles %}
+  <tr>
+    <td><a href="{{ article.link }}">{{ article.title }}</a></td>
+    <td>{{ article.time }}</td>
+    <td>{{ article.description }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
 
     <script>
         $(function() {
