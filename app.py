@@ -27,21 +27,13 @@ def get_articles_route():
     sort_order = request.args.get('sort')
 
     # Sort articles by date or alphabetically
-    if sort_order == 'date':
-        sorted_articles = sorted(filtered_articles, key=lambda a: a['time'])
-    else:
+    if sort_order == 'title':
         sorted_articles = sorted(filtered_articles, key=lambda a: a['title'].lower())
+    else:
+        sorted_articles = sorted(filtered_articles, key=lambda a: a['time'])
 
     return render_template('articles.html', articles=sorted_articles)
 
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
-
-
 if __name__ == '__main__':
-    for article in articles:
-        print(article['time'])
-        break
     app.run()
