@@ -34,10 +34,10 @@ def get_articles_route():
         sorted_articles = sorted(filtered_articles, key=lambda a: a['title'].lower())
     elif sort_type == 'title' and sort_order == 'desc':
         sorted_articles = sorted(filtered_articles, key=lambda a: a['title'].lower(), reverse=True)
-    elif sort_type == 'time' and sort_order == 'desc':
-        sorted_articles = sorted(filtered_articles, key=lambda a: a['time'], reverse=True)
-    else:
+    elif sort_type == 'time' and sort_order == 'asc':
         sorted_articles = sorted(filtered_articles, key=lambda a: a['time'])
+    else:
+        sorted_articles = sorted(filtered_articles, key=lambda a: a['time'], reverse=True)
 
     return render_template('articles.html', articles=sorted_articles)
 
