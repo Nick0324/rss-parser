@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request
-from scraper import get_articles
+from scraper import get_articles, add_articles_to_database
 import json
 
 app = Flask(__name__)
 
-# Load articles from web scraper
+# Load articles from the scraper
 articles = get_articles('https://rss.nytimes.com/services/xml/rss/nyt/World.xml')
+
+add_articles_to_database(articles)
 
 # Write articles to JSON file
 with open('articles.json', 'w', encoding='utf-8') as f:
